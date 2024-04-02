@@ -6,6 +6,13 @@ from django.utils import timezone
 
 # first we will create the Post model
 class Post(models.Model):
+    
+    # here goes the char choice field for the status 
+    # is it published or drafted
+    class Status(models.TextChoices):
+        DRAFT = 'DF','draft'
+        PUBLISHED = 'PB','Published'
+        
     title = models.CharField(max_length=250)
     slug = models.CharField(max_length=250)
     body = models.TextField()
@@ -13,6 +20,13 @@ class Post(models.Model):
     publish = models.TimeField(default=timezone.now)
     created = models.TimeField(auto_now_add=True)
     updated = models.TimeField(auto_now=True)
+    
+    # adding the status field for the model
+    status = models.CharField(
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT
+    )
     
     
     # basically what happens is the posts to be shown in the website should be reverse order
