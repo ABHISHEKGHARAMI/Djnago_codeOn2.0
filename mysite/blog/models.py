@@ -1,6 +1,9 @@
 from django.db import models
 # importing time zone
 from django.utils import timezone
+
+# now time for creating  many  to one relationship for the model
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -14,7 +17,11 @@ class Post(models.Model):
         PUBLISHED = 'PB','Published'
         
     title = models.CharField(max_length=250)
-    slug = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250)
+    #adding author
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='blog_posts')
     body = models.TextField()
     # adding the time field as the parameter of the model Post.
     publish = models.TimeField(default=timezone.now)
