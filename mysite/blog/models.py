@@ -21,6 +21,9 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-publish']
+        indexes = [
+            models.Index(fields=['-publish']),
+        ]
     
     # method for title
     def __str__(self):
