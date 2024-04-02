@@ -52,4 +52,4 @@ class Post(models.Model):
         return self.title
     
     
-    #creation of the super user where username is - hunter001@ password is : Suraj001@
+    #creation of the super user where username is - hunter001 password is : Suraj001@
