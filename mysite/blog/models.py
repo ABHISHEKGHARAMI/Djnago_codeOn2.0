@@ -27,6 +27,7 @@ class Post(models.Model):
         choices=Status.choices,
         default=Status.DRAFT
     )
+    # this will create enum like [('DF', 'draft'), ('PB', 'Published')] for status.
     
     
     # basically what happens is the posts to be shown in the website should be reverse order
