@@ -50,3 +50,6 @@ class Post(models.Model):
     # method for title
     def __str__(self):
         return self.title
+    
+    
+    #creation of the super user where username is - hunter001@ password is : Suraj001@
