@@ -6,7 +6,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 # Create your models here.
 
-
+# custom manager
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 # first we will create the Post model
 class Post(models.Model):
     
@@ -34,6 +37,10 @@ class Post(models.Model):
         choices=Status.choices,
         default=Status.DRAFT
     )
+    
+    # declaring the managers
+    objects = models.Manager() # default manager
+    published = PublishedManager() # custom manager
     # this will create enum like [('DF', 'draft'), ('PB', 'Published')] for status.
     
     
