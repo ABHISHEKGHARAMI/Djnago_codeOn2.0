@@ -22,7 +22,8 @@ class Post(models.Model):
         PUBLISHED = 'PB','Published'
         
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250,
+                            unique='publish')
     #adding author
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
@@ -62,6 +63,10 @@ class Post(models.Model):
     
     # for dynamically build url
     def get_absolute_url(self):
-        return reverse('blog:post_detail',args=[self.id])
+        return reverse('blog:post_detail',args=[self.publish.year,
+                                                self.publish.month,
+                                                self.publish.day,
+                                                self.slug
+                                                ])
     
     #creation of the super user where username is - hunter001 password is : Suraj001@
