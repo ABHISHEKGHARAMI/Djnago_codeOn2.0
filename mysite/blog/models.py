@@ -4,6 +4,8 @@ from django.utils import timezone
 
 # now time for creating  many  to one relationship for the model
 from django.contrib.auth.models import User
+# for creating the canonical url we will use reverse method
+from django.urls import reverse
 # Create your models here.
 
 # custom manager
@@ -58,5 +60,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    # for dynamically build url
+    def get_absolute_url(self):
+        return reverse('blog:post_detail',args=[self.id])
     
     #creation of the super user where username is - hunter001 password is : Suraj001@
