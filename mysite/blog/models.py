@@ -27,7 +27,7 @@ class Post(models.Model):
                                related_name='blog_posts')
     body = models.TextField()
     # adding the time field as the parameter of the model Post.
-    publish = models.DateTimeField(default=timezone.now)
+    publish = models.DateTimeField(default=timezone.now())
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
