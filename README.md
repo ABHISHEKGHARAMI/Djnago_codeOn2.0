@@ -21,3 +21,13 @@ Here goes the content for the site .
 15. using a decorater custom admin added which is going to be helpfull for the post when added or updated.
 16. Using the Django.auth.models from there User added for the many to one relation author foreign key object.
 17. Finally a post is created.
+18. Creating the templates for the site to show
+   the structure is-
+       templates
+         ---->blog
+               ---->base.html
+                 this will be the main rendering part and have a sidebar to  it.
+                 which will inherit the list and detail
+               ----> post
+                    ----> list.html
+                    ----> detail.html
