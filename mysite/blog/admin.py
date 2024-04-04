@@ -7,7 +7,7 @@ from .models import Post
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     # this is for what to display in the post 
-    list_display = ['title','slug','author','status']
+    list_display = ['title','slug','author','publish','status']
     # this is for the filtering purpose to the post
     list_filter = ['status','created','publish','author']
     # for searching purpose
