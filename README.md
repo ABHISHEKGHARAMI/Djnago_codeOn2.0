@@ -31,3 +31,4 @@ Here goes the content for the site .
                ----> post
                     ----> list.html
                     ----> detail.html
+19. Successfully added the published .

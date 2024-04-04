@@ -6,7 +6,7 @@ from django.http import Http404
 # first view
 def post_list(request):
     posts = Post.published.all()
-    print(posts)
+    #print(posts)
     return render(
         request,
         'blog/post/list.html',
