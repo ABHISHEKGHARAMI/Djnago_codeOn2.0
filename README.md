@@ -32,3 +32,4 @@ Here goes the content for the site .
                     ----> list.html
                     ----> detail.html
 19. Successfully added the published .
+Going to the 2nd chapter.
