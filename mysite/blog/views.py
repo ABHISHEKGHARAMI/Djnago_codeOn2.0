@@ -4,9 +4,10 @@ from django.http import Http404
 #adding the paginator
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 # Create your views here.
+from django.views.generic import ListView
 
 # first view
-def post_list(request):
+'''def post_list(request):
     post_list = Post.published.all()
     #print(posts)
     paginator = Paginator(post_list,3)
@@ -23,7 +24,14 @@ def post_list(request):
         {
             'posts':posts,
         }
-    )
+    )'''
+# Adding the post list view
+class PostListView(ListView):
+    # adding the class based post_list function
+    queryset = Post.published.all()
+    context_object_name = 'posts'
+    paginate_by = 3
+    template_name = 'blog/post/list.html'
 
 # 2nd view post detail
 def post_detail(request,year,month,day,post):
