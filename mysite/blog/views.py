@@ -6,6 +6,9 @@ from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 # Create your views here.
 from django.views.generic import ListView
 
+# adding   the form in view
+from .forms import EmailPostForm
+
 # first view
 '''def post_list(request):
     post_list = Post.published.all()
@@ -57,3 +60,39 @@ def post_detail(request,year,month,day,post):
             'post' : post
         }
     )
+    
+    
+# creating the view function for the form
+def post_share(request,post_id):
+    # retrive the post using the post_id
+    post = get_object_or_404(
+        Post,
+        id = post_id,
+        status = Post.Status.PUBLISHED
+    )
+    
+    if request.method == 'POST':
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(
+                post.get_absolute_url()
+            )
+            subject = f"{cd['name']} recommends you read " \
+                f"{post.title}"
+            message = f"Read {post.title} at {post_url}\n\n" \
+                      f"{cd['name']}\'s comments: {cd['comments']}"
+            (subject, message, 'your_account@gmail.com',[cd['to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+    
+    
+    # rendering
+    return render(request,
+                  'blog/post/share.html',
+                  {
+                      'post':post,
+                      'form':form
+                  }
+                  )
