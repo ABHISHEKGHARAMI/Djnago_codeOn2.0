@@ -33,3 +33,19 @@ Here goes the content for the site .
                     ----> detail.html
 19. Successfully added the published .
 Going to the 2nd chapter.
+
+20. Adding the cannonical route for the url
+  ---> it workslike we import the reverse method from the django.urls then make function for the 
+       get_absoluet_url()  in the models
+      then it added in the list.html
+21. Adding the seo friendly route for the site.
+     ways to do it is 
+        1. Added the slug field unique by adding the unique='publish' no slug can be added to the database as a same slug name on the same data
+        2. changing the url for that like -
+          <int:year>/<int:month>/<int:day><post:slug>
+        3. Now we change the post_detail
+        4. in models.py have to change the get_absolute_url() have to add year,month,day,slug as parameter.
+
+22. Adding the Paginator for the site.
+    Have to add django.core.paginator import Paginator then according to that have to add page number
+    and then add a paginator html file with checking the if else based upon the posts.
