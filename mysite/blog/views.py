@@ -8,6 +8,8 @@ from django.views.generic import ListView
 
 # adding   the form in view
 from .forms import EmailPostForm
+# adding the send mail module from django
+from django.core.mail import send_mail
 
 # first view
 '''def post_list(request):
@@ -70,6 +72,7 @@ def post_share(request,post_id):
         id = post_id,
         status = Post.Status.PUBLISHED
     )
+    sent = False
     
     if request.method == 'POST':
         form = EmailPostForm(request.POST)
@@ -82,7 +85,7 @@ def post_share(request,post_id):
                 f"{post.title}"
             message = f"Read {post.title} at {post_url}\n\n" \
                       f"{cd['name']}\'s comments: {cd['comments']}"
-            (subject, message, 'your_account@gmail.com',[cd['to']])
+            send_mail(subject, message, 'your_account@gmail.com',[cd['to']])
             sent = True
     else:
         form = EmailPostForm()
@@ -93,6 +96,7 @@ def post_share(request,post_id):
                   'blog/post/share.html',
                   {
                       'post':post,
-                      'form':form
+                      'form':form,
+                      'sent':sent
                   }
                   )

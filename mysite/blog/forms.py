@@ -1,7 +1,7 @@
 # creating the form for sharing user post
 from django import forms
 
-class EmailPostForm(forms.form):
+class EmailPostForm(forms.Form):
     # adding the different field
     name = forms.CharField(max_length=25)
     email = forms.EmailField()
