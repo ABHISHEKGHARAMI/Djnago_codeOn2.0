@@ -91,5 +91,5 @@ class Comment(models.Model):
             models.Index(fields=['created']),
         ]
         
-    def __str__():
+    def __str__(self):
         return f"commented by {self.name} on {self.post}"
