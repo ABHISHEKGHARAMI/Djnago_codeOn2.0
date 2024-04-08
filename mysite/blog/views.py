@@ -1,5 +1,5 @@
 from django.shortcuts import render , get_object_or_404
-from .models import Post
+from .models import Post , Comment
 from django.http import Http404
 #adding the paginator
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
@@ -7,10 +7,12 @@ from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from django.views.generic import ListView
 
 # adding   the form in view
-from .forms import EmailPostForm
+from .forms import EmailPostForm , CommentForm
 # adding the send mail module from django
 from django.core.mail import send_mail
 
+# from django.decorater we will use the post method
+from django.views.decorators.http import require_POST
 # first view
 '''def post_list(request):
     post_list = Post.published.all()
@@ -100,3 +102,22 @@ def post_share(request,post_id):
                       'sent':sent
                   }
                   )
+    
+# for method
+@require_POST
+def post_comments(request,post_id):
+    post = get_object_or_404(Post,
+                             id=post_id,
+                             status = Post.Status.PUBLISHED)
+    comment = None
+    form = CommentForm(data = request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.save()
+    return render('blog/post/comment.html',
+                  {
+                      'post':post,
+                      'form':form,
+                      'comment':comment
+                  })
