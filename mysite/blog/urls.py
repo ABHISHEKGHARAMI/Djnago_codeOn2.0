@@ -10,5 +10,8 @@ urlpatterns =[
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='post_detail'),
     # adding the share url
     path('<int:post_id>/share',views.post_share,
-         name= "post_share")
+         name= "post_share"),
+    path('<int:post_id>/comment/',
+         views.post_comments,
+         name='post_comments'),
 ]
