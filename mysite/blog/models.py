@@ -70,3 +70,26 @@ class Post(models.Model):
                                                 ])
     
     #creation of the super user where username is - hunter001 password is : Suraj001@
+    
+    
+# creating the comment model
+class Comment(models.Model):
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+    
+    # creating the meta class
+    class Meta:
+        ordering = ['created']
+        indexes = [
+            models.Index(fields=['created']),
+        ]
+        
+    def __str__():
+        return f"commented by {self.name} on {self.post}"
