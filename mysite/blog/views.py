@@ -16,6 +16,9 @@ from django.views.decorators.http import require_POST
 
 # importing the django.taggit
 from taggit.models import Tag
+
+# from django importing models agrresgation
+from django.db.models import Count
 # first view
 def post_list(request,tag_slug=None):
     post_list = Post.published.all()
@@ -67,6 +70,12 @@ def post_detail(request,year,month,day,post):
     comments = post.comments.filter(active=True)
     form = CommentForm()
     
+    # adding the similar post excluding the post
+    post_tag_ids = post.tags.values_list('id',
+                                         flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tag_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags = Count('tags')).order_by(['-same_tags',
+                                                                                '-publish'])[:4]
     
     
     return render(
@@ -75,7 +84,8 @@ def post_detail(request,year,month,day,post):
         {
             'post' : post,
             'comments' : comments,
-            'form' : form 
+            'form' : form ,
+            'similar_posts' : similar_posts
         }
     )
     
