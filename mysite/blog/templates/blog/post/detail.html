@@ -11,6 +11,18 @@
   <a  href="{% url "blog:post_share" post.id %}">Share this post.
   </a>
  </p>
+
+ <!---  Similar post --->
+ <h2>Similar Posts</h2>
+ {% for post in similar_post %}
+ <p>
+ <a href="{{ post.get_absolute_url}}">
+ {{post.title}}
+ </a>
+ <p>
+ {% empty %}
+ There is no similar posts yet .
+ {% endfor %}
  {% with comments.count as total_comments %}
  <h2>
  {{total_comments}} comment{{ total_comments | pluralize }}
