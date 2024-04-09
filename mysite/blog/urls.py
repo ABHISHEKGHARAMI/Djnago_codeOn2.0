@@ -6,7 +6,9 @@ app_name = 'blog'
 urlpatterns =[
     # post view
     #changing the post list view url for class based object .
-    path('',views.PostListView.as_view(),name='post_list'),
+    path('',views.post_list,name='post_list'),
+    path('tag/<slug:tag_slug>/',
+         views.post_list,name='post_list_by_tag'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='post_detail'),
     # adding the share url
     path('<int:post_id>/share',views.post_share,
@@ -14,6 +16,4 @@ urlpatterns =[
     path('<int:post_id>/comment/',
          views.post_comments,
          name='post_comments'),
-    path('tag/<slug:tag_slug>/',
-         views.post_list,name='post_list_by_tag'),
 ]
