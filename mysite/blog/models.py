@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 # Create your models here.
 
+# adding the django-taggit system  for tagging to the posts
+from taggit.managers import TaggableManager
+
 # custom manager
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -33,6 +36,8 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now())
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    tags = TaggableManager()
     
     # adding the status field for the model
     status = models.CharField(
