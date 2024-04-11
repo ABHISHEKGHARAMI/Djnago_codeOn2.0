@@ -22,6 +22,15 @@
          I have written {% total_posts %} posts so far .
          <h3>latest posts</h3>
          {% show_latest_posts 3%}
+         <h2>Most commented posts.</h2>
+         {% get_most_commented_post as commented_post %}
+         <ul>
+           {% for post in commented_post %}
+             <li>
+               <a href="{{ post.get_absolute_post  }}">{{post.title}}</a>
+             </li>
+           {% endfor %}
+         </ul>
        </div>
        
     </body>
