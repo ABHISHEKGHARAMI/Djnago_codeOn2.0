@@ -6,6 +6,8 @@ from django.db.models import Count
 
 # importing the markdown for the added filter
 import markdown
+# importing mark_safe
+from django.utils.safestring import mark_safe
 
 
 register = template.Library()
