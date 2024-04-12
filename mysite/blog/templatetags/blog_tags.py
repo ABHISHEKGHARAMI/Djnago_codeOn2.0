@@ -4,6 +4,9 @@ from ..models import Post
 # implementing the Count
 from django.db.models import Count
 
+# importing the markdown for the added filter
+import markdown
+
 
 register = template.Library()
 
@@ -25,3 +28,9 @@ def get_most_commented_post(count=5):
     return Post.published.annotate(
         total_comments=Count('comments')
     ).order_by('-total_comments')[:count]
+
+
+# adding the filter
+@register.filter(name="markdown")
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text))
