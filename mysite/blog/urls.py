@@ -17,5 +17,5 @@ urlpatterns =[
     path('<int:post_id>/comment/',
          views.post_comments,
          name='post_comments'),
-    path('/feeds',LatestPostsFeed(),name="post_feed"),
+    path('feeds/',LatestPostsFeed(),name='post_feed'),
 ]
