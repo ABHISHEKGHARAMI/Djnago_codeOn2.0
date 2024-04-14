@@ -18,4 +18,5 @@ urlpatterns =[
          views.post_comments,
          name='post_comments'),
     path('feeds/',LatestPostsFeed(),name='post_feed'),
+    path('search/', views.post_search, name='post_search'),
 ]
